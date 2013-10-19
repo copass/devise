@@ -44,14 +44,14 @@ module Devise
 
       # Resets reset password token and send reset password instructions by email.
       # Returns the token sent in the e-mail.
-      def send_reset_password_instructions
+      def send_reset_password_instructions(options={})
         raw, enc = Devise.token_generator.generate(self.class, :reset_password_token)
 
         self.reset_password_token   = enc
         self.reset_password_sent_at = Time.now.utc
         self.save(:validate => false)
 
-        send_devise_notification(:reset_password_instructions, raw, {})
+        send_devise_notification(:reset_password_instructions, raw, options)
         raw
       end
 

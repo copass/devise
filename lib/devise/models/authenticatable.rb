@@ -238,7 +238,7 @@ module Devise
         # an e-mail for password reset. In such cases, find_for_authentication
         # is not called.
         def find_for_authentication(tainted_conditions)
-          find_first_by_auth_conditions(tainted_conditions)
+          unscoped.find_first_by_auth_conditions(tainted_conditions)
         end
 
         def find_first_by_auth_conditions(tainted_conditions, opts={})
@@ -256,7 +256,7 @@ module Devise
           attributes.delete_if { |key, value| value.blank? }
 
           if attributes.size == required_attributes.size
-            record = find_first_by_auth_conditions(attributes)
+            record = unscoped.find_first_by_auth_conditions(attributes)
           end
 
           unless record
