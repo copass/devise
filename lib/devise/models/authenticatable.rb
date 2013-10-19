@@ -242,7 +242,7 @@ module Devise
         end
 
         def find_first_by_auth_conditions(tainted_conditions, opts={})
-          to_adapter.unscoped.find_first(devise_parameter_filter.filter(tainted_conditions).merge(opts))
+          unscoped.to_adapter.find_first(devise_parameter_filter.filter(tainted_conditions).merge(opts))
         end
 
         # Find an initialize a record setting an error if it can't be found.
